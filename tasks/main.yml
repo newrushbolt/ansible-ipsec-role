@@ -1,0 +1,21 @@
+---
+
+- yum:
+    name: strongswan
+
+- copy:
+    dest: /etc/strongswan/ipsec.secrets
+    content: " : PSK \"{{ ipsec_tunnel_secret }}\""
+  notify: restart strongswan
+
+- sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- template:
+    dest: /etc/strongswan/ipsec.conf
+    src: strongswan.conf.j2
+  notify: restart strongswan

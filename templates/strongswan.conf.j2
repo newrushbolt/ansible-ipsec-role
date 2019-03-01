@@ -1,0 +1,23 @@
+config setup
+    strictcrlpolicy=yes
+
+conn net-net
+    ikelifetime=600m # 36,000 s
+    keylife=180m # 10,800 s
+    {# rekeymargin=3m #}
+    {# keyingtries=3 #}
+    keyexchange=ike
+    ike=aes256gcm16-sha512-modp4096
+    esp=aes256gcm16-sha512-modp8192
+    authby=psk
+
+    left={{ ipsec_tunnel_local_endpoint }}
+    leftid={{ ipsec_tunnel_local_endpoint }}
+    leftsubnet={{ ipsec_tunnel_local_network }}
+    right={{ ipsec_tunnel_remote_endpoint }}
+    rightid={{ ipsec_tunnel_remote_endpoint }}
+    rightsubnet={{ ipsec_tunnel_remote_network }}
+    type=tunnel
+    auto=route
+    dpdaction=restart
+    closeaction=restart

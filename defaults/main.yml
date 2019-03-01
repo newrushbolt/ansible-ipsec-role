@@ -1,0 +1,16 @@
+---
+
+# our PreSharedKey
+ipsec_tunnel_secret: so_very_secret_PSK
+
+# remote host local network
+ipsec_tunnel_remote_network: "{{remote_network_addr}}/{{ remote_network_prefix }}"
+
+# this host local network
+ipsec_tunnel_local_network: 192.168.255.0/24
+
+# other ipsec host to connect to
+ipsec_tunnel_remote_endpoint: ""
+
+# this host external IP
+ipsec_tunnel_local_endpoint: "{{ ansible_default_ipv4.address }}"
